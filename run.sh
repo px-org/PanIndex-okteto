@@ -4,7 +4,7 @@ export TZ=Asia/Shanghai
 if [ "$version" = "" ]
 then
     TAG_URL="https://api.github.com/repos/libsgh/PanIndex/releases"
-    version="$(curl ${PROXY} \
+    version="$(curl \
         -H "Accept: application/json" \
         -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0" \
         -s "${TAG_URL}" --connect-timeout 20 | awk -F'[ "]+' '$0~"tag_name"{print $4;exit}' )"
@@ -20,7 +20,7 @@ cat > "/app/config.json" << EOF
   "key_file": "",
   "config_query": "",
   "db_type": "postgres",
-  "dsn": "host=${POSTGRESQL_HOST} user=${POSTGRESQL_USERNAME} password=${POSTGRESQL_PASSWORD} dbname=${POSTGRESQL_DATABASE} port=${DB_SERVICE_PORT} TimeZone=Asia/Shanghai"
+  "dsn": "host=${POSTGRESQL_HOST} user=${POSTGRESQL_USERNAME} password=${POSTGRESQL_PASSWORD} dbname=${POSTGRESQL_DATABASE} port=${DB_SERVICE_PORT} sslmode=disable"
 }
 EOF
 cat /app/config.json
