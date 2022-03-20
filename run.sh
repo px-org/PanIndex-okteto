@@ -1,9 +1,11 @@
 #!/bin/bash
-env
 version="$PAN_INDEX_VERSION"
+export TZ=Asia/Shanghai
+export DB_TYPE=postgres
+export DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRESQL_HOST}:5432/${POSTGRES_DB}"
 if [ "$version" = "" ]
 then
-    version=`curl --silent "https://api.github.com/repos/libsgh/PanIndex/releases/latest" \
+    version=`curl --silent "https://api.github.com/repos/libsgh/PanIndex/releases" \
         | grep '"tag_name":' \
         | sed -E 's/.*"([^"]+)".*/\1/'`
 fi

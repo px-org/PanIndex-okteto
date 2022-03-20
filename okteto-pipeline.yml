@@ -1,3 +1,4 @@
 deploy:
-  - okteto build -t okteto.dev/pan-index-okteto:latest
-  - kubectl apply -f k8s
+  - okteto build -t okteto.dev/pan-index-okteto:${OKTETO_GIT_COMMIT}
+  - cd manifest; kustomize edit set image okteto.dev/pan-index-okteto=okteto.dev/pan-index-okteto:${OKTETO_GIT_COMMIT}
+  - kubectl apply -f manifest

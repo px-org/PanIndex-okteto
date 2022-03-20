@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pan-index-okteto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pan-index-okteto
+  template:
+    metadata:
+      labels:
+        app: pan-index-okteto
+    spec:
+      containers:
+        - image: okteto.dev/pan-index-okteto:latest
+          name: pan-index-okteto
+          ports:
+            - containerPort: 5238
+          env:
+            - name: POSTGRESQL_HOST
+              value: db
+            - name: POSTGRESQL_USERNAME
+              value: okteto
+            - name: POSTGRESQL_PASSWORD
+              value: okteto
+            - name: POSTGRESQL_DATABASE
+              value: okteto
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pan-index-okteto
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: "pan-index-okteto"
+      port: 5238
+  selector:
+    app: pan-index-okteto
