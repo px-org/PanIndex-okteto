@@ -19,4 +19,4 @@ spec:
             - containerPort: 5238
           env:
             - name: PAN_INDEX_VERSION
-              value: $PAN_INDEX_VERSION
+              value: ${PAN_INDEX_VERSION}
