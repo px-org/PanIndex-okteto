@@ -1,8 +1,6 @@
-FROM debian:10-slim
+FROM golang:1.17
 MAINTAINER libsgh
-ENV TZ=Asia/Shanghai
-RUN apt-get update
-RUN apt-get install -y curl
+ENV GIN_MODE=release
 WORKDIR /app
 COPY run.sh /app
 RUN chmod +x /app/run.sh
