@@ -1,4 +1,5 @@
 #!/bin/bash
+env
 version="$PAN_INDEX_VERSION"
 if [ "$version" = "" ]
 then
