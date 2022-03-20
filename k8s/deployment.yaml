@@ -17,3 +17,6 @@ spec:
           name: pan-index-okteto
           ports:
             - containerPort: 5238
+          env:
+            - name: PAN_INDEX_VERSION
+              value: "v3.0.4"
